@@ -1,0 +1,16 @@
+{% extends "discover/base.html" %}
+
+{% block content %}
+
+<div id="promo">
+    <div class="jumbotron shadow text-center">
+      <p id="startHeading">Start your fitness journey now</p>
+      <a class="btn btn-dark btn-lg" href = "{% url 'register' %}">Click here to REGISTER</a>
+    </div>
+</div>
+<div class="container text-center" id="siteSection">
+    <h1 id="headingSection">Do you want to achieve your fitness goal?</h1>
+    <p id = paragraphSection>Start working on your goal with the help of a professional coach.<br>Our platform provides you a large variety of professionals that can guide and support you in order to achieve your fitness goal.<br><br></p>
+</div>
+
+{% endblock content %}

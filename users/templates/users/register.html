@@ -1,0 +1,67 @@
+{% extends "discover/base.html" %}
+
+
+{% block title %} Create an account {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container justify-content-center">
+      <div class="card bg-light mb-3" id="registerCard">
+        <div class="card-body">
+          <h1 class = "card-title"> Create new account</h1>
+          <div class="row align-middle border-top pt-3">
+            <div>
+              <form class="form" method="POST">
+                {% csrf_token %}
+                  <div class='form-row'>
+                    <div class="col">
+                      {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                      {{ form.email|as_crispy_field }}
+                    </div>
+                  </div>
+                 <div class="form-row">
+                    <div class="col">
+                      {{ form.password1|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                      {{ form.password2|as_crispy_field }}
+                    </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col">
+                      {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                      {{ form.last_name|as_crispy_field }}
+                    </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col">
+                      {{ form.birth_day|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                      {{ form.birth_month|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                      {{ form.birth_year|as_crispy_field }}
+                    </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col">
+                      {{ form.register_as|as_crispy_field }}
+                    </div>
+                 </div>
+
+                 <button class='btn btn-dark btn-lg btn-block' type='submit'>Register</button>
+              </form>
+              <div class="border-top pt-3" id = "questionText">
+                <small class = "text-muted">Already have an account?<a class = "ml-2" href="{% url 'login' %}">Click here to LOG IN</a></small>
+              </div>
+              </div>
+        </div>
+      </div>
+
+</div>
+
+{% endblock content %}

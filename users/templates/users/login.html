@@ -1,0 +1,30 @@
+{% extends "discover/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container justify-content-center">
+  <div class="card bg-light mb-3" id="loginCard">
+    <div class="card-body">
+      <h1 class = "card-title">Login</h1>
+      <div class="row align-middle border-top pt-3">
+        <div class="container-fluid">
+          <form method="post" action = "{% url 'login' %}" class = "form">
+            {% csrf_token %}
+            <div class = "form-group">
+            {{ form|crispy }}
+            </div>
+            <div class="form-group">
+              <button type="submit" class = "btn btn-dark btn-lg btn-block">Log in</button>
+            </div>
+          </form>
+          <div class="border-top pt-3">
+            <small class = "text-muted">Don't have an account?<a class = "ml-2" href="{% url 'register' %}">Click here to REGISTER</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%  endblock content %}
