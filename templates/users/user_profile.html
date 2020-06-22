@@ -1,0 +1,44 @@
+{% extends "discover/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col-6 card bg-light mb-3">
+      <div class="media">
+        <img class="account-img rounded-circle" src="{{ user.userprofile.image.url }}">
+        <div class="media-body">
+          <h5 class="mt-0 border-bottom pt-1">{{user.first_name}} {{user.last_name}}</h5>
+           <h6>{{user.userprofile.description}}</h6>
+        </div>
+        <div class="">
+          {% if request.user.is_authenticated and user == request.user %}
+           <h5>Edit</h5>
+          {% endif %}
+        </div>
+      </div>
+      <div class="border-bottom pt-3">
+        <h6>@{{user.username}}</h6>
+      </div>
+    </div>
+    <div class="col">
+      {% if user.register_as == 'Coach' %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            Ratings
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Comment 1</li>
+            <li class="list-group-item">Comment 2</li>
+            <li class="list-group-item">Comment 3</li>
+          </ul>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{%  endblock content %}

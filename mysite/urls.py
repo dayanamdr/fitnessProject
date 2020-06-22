@@ -12,10 +12,9 @@ urlpatterns = [
     path('', include('discover.urls')),
     path('discover/', include('discover.urls')),
     path('register/', user_views.registerPage ,name = 'register'),
-    path('client_profile/', user_views.client_profile, name = 'client-profile'),
-    path('coach_profile/', user_views.coach_profile, name = 'coach-profile'),
     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html', redirect_authenticated_user = True), name = 'login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name = 'logout'),
+    path('@<str:username>/', include('users.urls')),
 ]
 
 if settings.DEBUG:

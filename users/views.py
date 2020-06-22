@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 
 from .forms import UserRegisterForm
 from .decorators import unauthenticated_user, allowed_users_profile
-from users.models import User
+from users.models import User, UserProfile
 
 
 @unauthenticated_user
@@ -23,7 +23,7 @@ def registerPage(request):
             group_type = name.register_as
             group = Group.objects.get(name = group_type)
             user.groups.add(group)
-            
+
             messages.success(request, f'Your account has been created! Now you are able to LOGIN')
             return redirect('login')
     else:
@@ -31,11 +31,7 @@ def registerPage(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-@login_required
-@allowed_users_profile(allowed_roles = ['Client'])
-def client_profile(request):
-    return render(request, 'users/client_profile.html')
-
-@login_required
-def coach_profile(request):
-    return render(request, 'users/coach_profile.html')
+def view_user_profile(request, username):
+    user = User.objects.get(username = username)
+    context = {'user':user}
+    return render(request, 'users/user_profile.html', context)

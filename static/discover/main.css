@@ -23,8 +23,10 @@
 }
 
 .account-img {
-  max-width: 130px;
-  max-height: 130px;
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
 }
 
 .media-body {
