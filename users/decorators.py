@@ -24,7 +24,7 @@ def allowed_users(allowed_roles = []):
         return wrapper_func
     return decorator
 
-# use this to redirect a user he is a coach on his pages
+# use this to redirect a user if he is a coach on his pages
 def allowed_users_profile(allowed_roles = []):
     def decorator(view_func):
         def wrapper_func(request, *args, **kwargs):

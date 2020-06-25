@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
+from django.http import Http404, HttpResponse, HttpResponseForbidden
+from django.shortcuts import render, redirect
+from django.views.generic import ListView
 
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .decorators import unauthenticated_user, allowed_users_profile
@@ -39,21 +41,25 @@ def view_user_profile(request, username):
 
 @login_required
 def update_user_profile(request, username):
-    user = User.objects.get(username = username)
-    context = {'user':user}
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance = request.user)
-        profile_form = ProfileUpdateForm(request.POST,
-                                         request.FILES,
-                                         instance = request.user.userprofile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, f'Your account has been update!')
-            return redirect('user-profile', username = user)
+    if username == request.user.username:
+        user = User.objects.get(username = username)
+        context = {'user':user}
+        if request.method == 'POST':
+
+                user_form = UserUpdateForm(request.POST, instance = request.user)
+                profile_form = ProfileUpdateForm(request.POST,
+                                                 request.FILES,
+                                                 instance = request.user.userprofile)
+                if user_form.is_valid() and profile_form.is_valid():
+                    user_form.save()
+                    profile_form.save()
+                    messages.success(request, f'Your account has been update!')
+                    return redirect('user-profile', username = user)
+        else:
+            user_form = UserUpdateForm(instance = request.user)
+            profile_form = ProfileUpdateForm(instance = request.user.userprofile)
     else:
-        user_form = UserUpdateForm(instance = request.user)
-        profile_form = ProfileUpdateForm(instance = request.user.userprofile)
+        return HttpResponseForbidden()
 
     context = {
         'user_form' :user_form,
