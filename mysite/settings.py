@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'discover.apps.DiscoverConfig',
+    'posts.apps.PostsConfig',
     'crispy_forms',
     'tempus_dominus',
 
@@ -135,5 +136,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'discover-coaches'
 LOGIN_URL = 'login'
+
 
 AUTH_USER_MODEL="users.User"

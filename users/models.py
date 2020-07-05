@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datetime import datetime, date
+
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
@@ -19,9 +19,3 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-class UserPost(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    description = models.TextField(max_length = 2000, null = True, blank = True)
-    image = models.ImageField(upload_to = 'userpost_pics', null = True, blank = True)
-    date = models.DateTimeField(auto_now_add = True, null = True)

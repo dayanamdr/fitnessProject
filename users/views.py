@@ -5,12 +5,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .decorators import unauthenticated_user, allowed_users_profile
 from users.models import User, UserProfile
 
+from posts.models import UserPost
+from posts.forms import PostForm
 
 @unauthenticated_user
 def registerPage(request):
@@ -35,7 +37,24 @@ def registerPage(request):
 
 def view_user_profile(request, username):
     user = User.objects.get(username = username)
-    context = {'user':user}
+    post_list = UserPost.objects.filter(user_id = user.id)
+
+    if request.method == 'POST':
+        post_form = PostForm(request.POST,
+                                   request.FILES,
+                                   )
+        if post_form.is_valid():
+            instance = post_form.save(commit = False)
+            instance.user = request.user
+            instance.save()
+
+            messages.success(request, f'New post created!')
+            return redirect('user-profile', username = user)
+
+    else:
+        post_form = PostForm()
+
+    context = {'user':user, 'post_list': post_list, 'post_form':post_form}
 
     return render(request, 'users/user_profile.html', context)
 
