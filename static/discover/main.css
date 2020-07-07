@@ -33,6 +33,13 @@
   padding: 10px;
 }
 
+.postPic {
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
 #questionText {
   font-size: 20px;
   text-align: center;

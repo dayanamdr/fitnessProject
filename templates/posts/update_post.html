@@ -5,14 +5,13 @@
   <div class="container justify-content-center">
       <div class="card bg-light mb-3" id="registerCard">
         <div class="card-body">
-          <h1 class="card-title">Edit profile</h1>
+          <h1 class = "card-title">Edit post</h1>
           <div class="row align-middle border-top pt-3">
-            <div class="container-fluid">
+            <div class = "container-fluid">
               <form class="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ user_form|crispy }}
-                {{ profile_form|crispy }}
-                <button class='btn btn-dark btn-lg btn-block' type='submit'>Update</button>
+                {{ post_form|crispy }}
+                <button class='btn btn-dark btn-lg btn-block' type='submit'>Save</button>
               </form>
             </div>
         </div>
