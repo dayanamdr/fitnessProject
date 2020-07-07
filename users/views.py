@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView
 
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .decorators import unauthenticated_user, allowed_users_profile
@@ -37,7 +36,7 @@ def registerPage(request):
 
 def view_user_profile(request, username):
     user = User.objects.get(username = username)
-    post_list = UserPost.objects.filter(user_id = user.id)
+    post_list = UserPost.objects.filter(user_id = user.id).order_by('-date')
 
     if request.method == 'POST':
         post_form = PostForm(request.POST,
