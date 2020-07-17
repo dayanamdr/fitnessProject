@@ -10,8 +10,8 @@
       <div class="media">
           <img class="account-img rounded-circle" src="{{ user.userprofile.image.url }}">
           <div class="media-body">
-            <h5 class="mt-0 border-bottom pt-1">{{user.first_name}} {{user.last_name}}</h5>
-            <h6>{{user.userprofile.description}}</h6>
+            <h5 class="mt-0 border-bottom pt-1">{{ user.first_name }} {{ user.last_name }}</h5>
+            <h6>{{ user.userprofile.description }}</h6>
           </div>
           <div class="">
             {% if request.user.is_authenticated and user == request.user %}
@@ -27,7 +27,7 @@
           </div>
       </div>
       <div>
-          <h6>@{{user.username}}</h6>
+          <h6>@{{ user.username }}</h6>
       </div>
       <div>
         {% if request.user.is_authenticated and user == request.user %}
@@ -51,7 +51,7 @@
             <div class="media p-2">
               <img class="postPic rounded-circle" src="{{ user.userprofile.image.url }}">
               <div class="media-body">
-                <h5 class="mt-0 p-1 mb-2 rounded border-bottom">{{user.first_name}} {{user.last_name}}</h5>
+                <h5 class="mt-0 p-1 mb-2 rounded border-bottom">{{ user.first_name }} {{ user.last_name }}</h5>
                 <p> {{ post.description }} </p>
               </div>
               {% if request.user.is_authenticated and user == request.user %}

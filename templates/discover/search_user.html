@@ -8,20 +8,19 @@
   <div class="col-6 ">
     <div class="card border-info ">
       <div class="card-header card-title">
-        <h3>Discover</h3>
       </div>
       <ul class="list-group list-group-flush">
-        {% for coach in coaches %}
+        {% for user in users %}
           <li class="list-group-item">
             <div class="media" id = "profile-pic">
-              <img class="account-img rounded-circle" src="{{ coach.userprofile.image.url }}">
+              <img class="account-img rounded-circle" src="{{ user.userprofile.image.url }}">
               <div class="media-body">
-                <h5 class="mt-0 border-bottom pt-1"><a class="text-decoration-none" href="{% url 'user-profile' coach %}">{{coach.first_name}} {{coach.last_name}}</a></h5>
-                 <h6>{{ coach.userprofile.description }}</h6>
+                <h5 class="mt-0 border-bottom pt-1"><a class="text-decoration-none" href="{% url 'user-profile' user %}">{{ user.first_name }} {{ user.last_name }}</a></h5>
+                 <h6>{{ user.userprofile.description }}</h6>
               </div>
             </div>
             <div>
-              <h6>@{{ coach.username }}</h6>
+              <h6>@{{ user.username }}</h6>
             </div>
           </li>
         {% endfor %}

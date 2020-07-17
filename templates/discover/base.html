@@ -24,6 +24,9 @@
 
     {# Django Tempus Dominus assets are included in `{{ form.media }}` #}
     {{ form.media }}
+
+
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,8 +35,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search-user' %}" method="GET" name="search-form" onsubmit="return validateForm()">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name = "q">
           <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav ml-auto">
@@ -41,16 +44,16 @@
             <a class="nav-link" href="{% url 'discover-coaches' %}">Discover</a>
           </li>
           {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'user-profile' request.user %}">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'user-profile' request.user %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
           {% endif %}
         </ul>
       </div>
@@ -65,5 +68,14 @@
     {% block content%}
 
     {% endblock content %}
+
+    <script>
+      function validateForm() {
+        var x = document.forms["search-form"]["q"].value;
+        if (x == "") {
+          return false;
+        }
+      }
+    </script>
   </body>
 </html>
